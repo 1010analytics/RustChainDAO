@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
 contract ProposalManagement {
@@ -8,12 +9,15 @@ contract ProposalManagement {
     }
 
     Proposal[] public proposals;
+    event ProposalStatusChanged(uint proposalId, bool isActive);
 
     function createProposal(string memory description) public {
         proposals.push(Proposal(proposals.length, description, true));
+        emit ProposalStatusChanged(proposals.length - 1, true);
     }
 
     function deactivateProposal(uint proposalId) public {
-        proposals[proposalId].active = false;
+        proposals[proposalId]. active = false;
+        emit ProposalStatusChanged(proposalId, false);
     }
 }
